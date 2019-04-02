@@ -49,7 +49,6 @@ function slider() {
 			console.log(slides[slideIndex - 1]);
 	    	slides.forEach(item => item.style.display = 'none');
 	    	slides[slideIndex - 1].style.display = 'block';
-	    	slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
 		}
 
 		let plusSlides = n => {
@@ -58,10 +57,12 @@ function slider() {
 
 		prev.addEventListener('click', () => {
 			plusSlides(-1);
+			slides[slideIndex - 1].classList.add('animated', 'fadeInLeft');			
 		});
 
 		next.addEventListener('click', () => {
 			plusSlides(1);
+			slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
 		});
 
 		showSlides(slideIndex);

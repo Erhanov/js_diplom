@@ -47,25 +47,41 @@ function form() {
 		formModalDesign = document.querySelector('.form-modal_design'),
 		buttonConsult = document.querySelector('.button-consult'),
 		buttonModalConsult = document.querySelector('.button-modal_consult'),
-		buttonModalDesign = document.querySelector('.button-modal_design');
+		buttonModalDesign = document.querySelector('.button-modal_design'),
+		nameInput = document.querySelectorAll('.name-input'),
+		phoneInput = document.querySelectorAll('.phone-input'),
+		emailInput = document.querySelectorAll('.email-input'),
+		messageInput = document.querySelector('.message-input');
+
+
+
 
 
 	formConsult.addEventListener('submit', () => {
 		SendForm(event, formConsult).then(() => statusMessage.innerHTML = message.loading)
 									.then(() => statusMessage.innerHTML = message.success)
-									.catch(() => statusMessage.innerHTML = message.failure);
+									.catch(() => statusMessage.innerHTML = message.failure)
+									.then(() => clearInput(nameInput))
+									.then(() => clearInput(phoneInput))
+									.then(() => clearInput(emailInput))
+									.then(() => clearInput(messageInput))
 	});
 
 	formModalConsult.addEventListener('submit', () => {
 		SendForm(event, formModalConsult).then(() => statusMessage.innerHTML = message.loading)
 									.then(() => statusMessage.innerHTML = message.success)
-									.catch(() => statusMessage.innerHTML = message.failure);
+									.catch(() => statusMessage.innerHTML = message.failure)
+									.then(() => clearInput(nameInput))
+									.then(() => clearInput(phoneInput));
 	});
 
 	formModalDesign.addEventListener('submit', () => {
 		SendForm(event, formModalDesign).then(() => statusMessage.innerHTML = message.loading)
 									.then(() => statusMessage.innerHTML = message.success)
-									.catch(() => statusMessage.innerHTML = message.failure);
+									.catch(() => statusMessage.innerHTML = message.failure)
+									.then(() => clearInput(nameInput))
+									.then(() => clearInput(phoneInput))
+									.then(() => clearInput(emailInput));
 	});
 }
 

@@ -1519,12 +1519,14 @@ window.addEventListener('DOMContentLoaded', function () {
   var calc = __webpack_require__(/*! ./parts/calc.js */ "./src/parts/calc.js"),
       modal = __webpack_require__(/*! ./parts/modal.js */ "./src/parts/modal.js"),
       slider = __webpack_require__(/*! ./parts/slider.js */ "./src/parts/slider.js"),
-      form = __webpack_require__(/*! ./parts/form.js */ "./src/parts/form.js");
+      form = __webpack_require__(/*! ./parts/form.js */ "./src/parts/form.js"),
+      accordion = __webpack_require__(/*! ./parts/accordion.js */ "./src/parts/accordion.js");
 
   calc();
   modal();
   slider();
   form();
+  accordion();
 });
 
 if ('NodeList' in window && !NodeList.prototype.forEach) {
@@ -1538,6 +1540,60 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
     }
   };
 }
+
+/***/ }),
+
+/***/ "./src/parts/accordion.js":
+/*!********************************!*\
+  !*** ./src/parts/accordion.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function accordion() {
+  // Аккордион
+  var accordion = document.querySelectorAll('.activate-accordion'),
+      accordionBlock = document.querySelectorAll('.accordion-block'),
+      //accordion_info
+  accordionHeading = document.querySelectorAll('.accordion-heading'); //span_headind
+
+  console.log(accordionHeading);
+
+  var hideBlockContent = function hideBlockContent() {
+    for (var i = 0; i < accordionBlock.length; i++) {
+      accordionBlock[i].classList.remove('show');
+      accordionBlock[i].classList.remove('slideInDown');
+      accordionBlock[i].classList.add('hide');
+      accordionHeading[i].classList.remove('active');
+    }
+  };
+
+  hideBlockContent(1);
+
+  var showBlockContent = function showBlockContent(b) {
+    if (accordionBlock[b].classList.contains('hide')) {
+      accordionBlock[b].classList.remove('hide');
+      accordionBlock[b].classList.add('show');
+      accordionBlock[b].classList.add('slideInDown');
+      accordionHeading[b].classList.add('active');
+    }
+  };
+
+  accordion.addEventListener('click', function (event) {
+    var target = event.target;
+
+    if (target && target.classList.contains('heading')) {
+      for (var i = 0; i < accordionBlock.length; i++) {
+        if (target == accordionHeading[i]) {
+          hideBlockContent(0);
+          showBlockContent(i);
+        }
+      }
+    }
+  });
+}
+
+module.exports = accordion;
 
 /***/ }),
 
@@ -1653,7 +1709,11 @@ function form() {
       formModalDesign = document.querySelector('.form-modal_design'),
       buttonConsult = document.querySelector('.button-consult'),
       buttonModalConsult = document.querySelector('.button-modal_consult'),
-      buttonModalDesign = document.querySelector('.button-modal_design');
+      buttonModalDesign = document.querySelector('.button-modal_design'),
+      nameInput = document.querySelectorAll('.name-input'),
+      phoneInput = document.querySelectorAll('.phone-input'),
+      emailInput = document.querySelectorAll('.email-input'),
+      messageInput = document.querySelector('.message-input');
   formConsult.addEventListener('submit', function () {
     SendForm(event, formConsult).then(function () {
       return statusMessage.innerHTML = message.loading;
@@ -1661,6 +1721,14 @@ function form() {
       return statusMessage.innerHTML = message.success;
     }).catch(function () {
       return statusMessage.innerHTML = message.failure;
+    }).then(function () {
+      return clearInput(nameInput);
+    }).then(function () {
+      return clearInput(phoneInput);
+    }).then(function () {
+      return clearInput(emailInput);
+    }).then(function () {
+      return clearInput(messageInput);
     });
   });
   formModalConsult.addEventListener('submit', function () {
@@ -1670,6 +1738,10 @@ function form() {
       return statusMessage.innerHTML = message.success;
     }).catch(function () {
       return statusMessage.innerHTML = message.failure;
+    }).then(function () {
+      return clearInput(nameInput);
+    }).then(function () {
+      return clearInput(phoneInput);
     });
   });
   formModalDesign.addEventListener('submit', function () {
@@ -1679,6 +1751,12 @@ function form() {
       return statusMessage.innerHTML = message.success;
     }).catch(function () {
       return statusMessage.innerHTML = message.failure;
+    }).then(function () {
+      return clearInput(nameInput);
+    }).then(function () {
+      return clearInput(phoneInput);
+    }).then(function () {
+      return clearInput(emailInput);
     });
   });
 }
@@ -1824,7 +1902,6 @@ function slider() {
         return item.style.display = 'none';
       });
       slides[slideIndex - 1].style.display = 'block';
-      slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
     };
 
     var plusSlides = function plusSlides(n) {
@@ -1833,9 +1910,11 @@ function slider() {
 
     prev.addEventListener('click', function () {
       plusSlides(-1);
+      slides[slideIndex - 1].classList.add('animated', 'fadeInLeft');
     });
     next.addEventListener('click', function () {
       plusSlides(1);
+      slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
     });
     showSlides(slideIndex);
   };
