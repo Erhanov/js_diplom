@@ -8,7 +8,6 @@ function modal() {
 		close = document.querySelectorAll('.popup-close'),
 		MainBody = document.getElementsByTagName("body")[0];
 
-	console.log(MainBody);
 
 	let showModal = (modal) => {
 		modal.classList.add('show');

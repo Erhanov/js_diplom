@@ -1775,7 +1775,6 @@ function modal() {
       popupGift = document.querySelector('.popup-gift'),
       close = document.querySelectorAll('.popup-close'),
       MainBody = document.getElementsByTagName("body")[0];
-  console.log(MainBody);
 
   var showModal = function showModal(modal) {
     modal.classList.add('show');
