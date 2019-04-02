@@ -1910,10 +1910,12 @@ function slider() {
 
     prev.addEventListener('click', function () {
       plusSlides(-1);
+      slides[slideIndex - 1].classList.remove('animated', 'fadeInRight');
       slides[slideIndex - 1].classList.add('animated', 'fadeInLeft');
     });
     next.addEventListener('click', function () {
       plusSlides(1);
+      slides[slideIndex - 1].classList.remove('animated', 'fadeInLeft');
       slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
     });
     showSlides(slideIndex);
