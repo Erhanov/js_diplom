@@ -16,7 +16,7 @@ function modal() {
 	}
 
 	let closeModal = (modal) => {
-		modal.classList.remove("hide");
+		modal.classList.remove("show");
 		document.body.style.overflow = '';
 	}
 	let counterBottom = 0,

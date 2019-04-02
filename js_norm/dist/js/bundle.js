@@ -1783,7 +1783,7 @@ function modal() {
   };
 
   var closeModal = function closeModal(modal) {
-    modal.classList.remove("hide");
+    modal.classList.remove("show");
     document.body.style.overflow = '';
   };
 
