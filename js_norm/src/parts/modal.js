@@ -5,17 +5,19 @@ function modal() {
 		popupConsultation = document.querySelector('.popup-consultation'),
 		popupDesign = document.querySelector('.popup-design'),
 		popupGift = document.querySelector('.popup-gift'),
-		close = document.querySelectorAll('.popup-close');
+		close = document.querySelectorAll('.popup-close'),
+		MainBody = document.getElementsByTagName("body")[0];
+
+	console.log(MainBody);
 
 	let showModal = (modal) => {
-		modal.style.display = 'block';
+		modal.classList.add('show');
 		document.body.style.overflow = 'hidden';
 		counter60sec++;
-		console.log(counter60sec);
 	}
 
 	let closeModal = (modal) => {
-		modal.style.display = 'none';
+		modal.classList.remove("hide");
 		document.body.style.overflow = '';
 	}
 	let counterBottom = 0,
@@ -28,7 +30,6 @@ function modal() {
 			closeModal(popupGift);
 			counterBottom++;
 			counter60sec--;
-			console.log(counter60sec);
 		});	
 	});	
 
@@ -46,7 +47,16 @@ function modal() {
 
 	buttonGift.addEventListener('click', () => {
 		showModal(popupGift);
+		buttonGift.style.display = 'none';
 	});
+
+	MainBody.addEventListener("click", event => {
+        let target = event.target;
+        if (target && target.classList.contains("show")) {
+            target.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+    });
 
 	window.onscroll = function(ev) {
 	    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight
@@ -64,10 +74,7 @@ function modal() {
 		}
 	}, 60000);
 
-	console.log(close);
-	console.log(buttonConsultation);
-	console.log(buttonDesign);
-	console.log(buttonGift);
+
 }
 
 module.exports = modal;

@@ -5,7 +5,8 @@ function calc() {
 		materialPicture = document.getElementById('material'),
 		optionsPicture = document.getElementById('options'),
 		promocodePicture = document.querySelector('.promocode'),
-		pricePicture = document.querySelector('.calc-price');
+		pricePicture = document.querySelector('.calc-price'),
+		promo = 1;
 
 
 	let startValue = 0;
@@ -21,7 +22,7 @@ function calc() {
 			pricePicture.innerHTML = 0;
 		} 
 
-		pricePicture.innerHTML = startValue;
+		pricePicture.innerHTML = startValue * promo;
 
 		console.log(sizePicture.options[sizePicture.selectedIndex].value);
 		console.log(materialPicture.options[materialPicture.selectedIndex].value);
@@ -39,7 +40,7 @@ function calc() {
 			pricePicture.innerHTML = 0;
 		} 
 
-		pricePicture.innerHTML = startValue;
+		pricePicture.innerHTML = startValue * promo;
 	});
 
 	optionsPicture.addEventListener('change', function() {
@@ -52,18 +53,20 @@ function calc() {
 			pricePicture.innerHTML = 0;
 		} 
 
-		pricePicture.innerHTML = startValue;
+		pricePicture.innerHTML = startValue * promo;
 	});
 
 	promocodePicture.addEventListener('input', () => {
-
 		startValue = 4000 * materialPicture.options[materialPicture.selectedIndex].value
 		 			* sizePicture.options[sizePicture.selectedIndex].value
 		 			* optionsPicture.options[optionsPicture.selectedIndex].value;
 
 		if (promocodePicture.value == 'IWANTPOPART') {
-			let a = startValue * 0.7;
-			pricePicture.innerHTML = a;
+			promo = 0.7;
+			pricePicture.innerHTML = startValue * promo;
+		} else {
+			promo = 1;
+			pricePicture.innerHTML = startValue * promo;
 		}
 	});
 }

@@ -38,8 +38,22 @@ function form() {
 		return promise;
 	};
 
-	let clearInput = (input) => {
+	let clearInputConsult = (input, input1, input2, input3) => {
 		input.value = '';
+		input1.value = '';
+		input2.value = '';
+		input3.value = '';
+	};
+
+	let clearInputModalConsult = (input, input1) => {
+		input.value = '';
+		input1.value = '';
+	};
+
+	let clearInputModalDesign = (input, input1, input2) => {
+		input.value = '';
+		input1.value = '';
+		input2.value = '';
 	};
 
 	let formConsult = document.querySelector('.form-consult'),
@@ -61,27 +75,21 @@ function form() {
 		SendForm(event, formConsult).then(() => statusMessage.innerHTML = message.loading)
 									.then(() => statusMessage.innerHTML = message.success)
 									.catch(() => statusMessage.innerHTML = message.failure)
-									.then(() => clearInput(nameInput))
-									.then(() => clearInput(phoneInput))
-									.then(() => clearInput(emailInput))
-									.then(() => clearInput(messageInput))
+									.then(() => clearInputConsult(messageInput, nameInput[0], phoneInput[0], emailInput[0]));
 	});
 
 	formModalConsult.addEventListener('submit', () => {
 		SendForm(event, formModalConsult).then(() => statusMessage.innerHTML = message.loading)
 									.then(() => statusMessage.innerHTML = message.success)
 									.catch(() => statusMessage.innerHTML = message.failure)
-									.then(() => clearInput(nameInput))
-									.then(() => clearInput(phoneInput));
+									.then(() => clearInputModalConsult(phoneInput[1], nameInput[1]));
 	});
 
 	formModalDesign.addEventListener('submit', () => {
 		SendForm(event, formModalDesign).then(() => statusMessage.innerHTML = message.loading)
 									.then(() => statusMessage.innerHTML = message.success)
 									.catch(() => statusMessage.innerHTML = message.failure)
-									.then(() => clearInput(nameInput))
-									.then(() => clearInput(phoneInput))
-									.then(() => clearInput(emailInput));
+									.then(() => clearInputModalDesign(phoneInput[2], nameInput[2], emailInput[2]));
 	});
 }
 

@@ -59,6 +59,18 @@ h3,
 h4 {
   font-family: 'Circe Extra Bold', sans-serif;
 }
+.active {
+  color:purple;
+  border-bottom: none!important;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
 .p15 {
   font-size: 1.5;
 }

@@ -1,43 +1,34 @@
 function accordion() {
     // Аккордион
-    let accordion = document.querySelectorAll('.activate-accordion'),
-        accordionBlock = document.querySelectorAll('.accordion-block'), //accordion_info
-        accordionHeading = document.querySelectorAll('.accordion-heading'); //span_headind
+    let accordBlock = document.querySelectorAll(".accordion-block"),
+        accordHeading = document.querySelectorAll(".accordion-heading");
 
-    console.log(accordionHeading);
-
-    let hideBlockContent = () => {
-        for (let i = 0; i < accordionBlock.length; i++) {
-            accordionBlock[i].classList.remove('show');
-            accordionBlock[i].classList.remove('slideInDown');
-            accordionBlock[i].classList.add('hide');
-            accordionHeading[i].classList.remove('active');
+    function hideBlockContent() {
+        for (let i = 0; i < accordBlock.length; i++) {
+            accordBlock[i].classList.remove("show");
+            accordBlock[i].classList.remove('animated', "jackInTheBox");
+            accordBlock[i].classList.add("hide");
+        }
+    }
+    hideBlockContent();
+    function showBlockContent(b) {
+        if (accordBlock[b].classList.contains("hide")) {
+            accordBlock[b].classList.remove("hide");
+            accordBlock[b].classList.add("show");
+            accordBlock[b].classList.add('animated', "jackInTheBox");
         }
     }
 
-    hideBlockContent(1);
 
-    let showBlockContent = (b) => {
-        if (accordionBlock[b].classList.contains('hide')) {
-            accordionBlock[b].classList.remove('hide');
-            accordionBlock[b].classList.add('show');
-            accordionBlock[b].classList.add('slideInDown');
-            accordionHeading[b].classList.add('active');
-        }
-    }
-
-    accordion.addEventListener('click', (event) => {
-        let target = event.target;
-        if (target && target.classList.contains('heading')) {
-            for (let i = 0; i < accordionBlock.length; i++) {
-                if (target == accordionHeading[i]) {
-                    hideBlockContent(0);
-                    showBlockContent(i);
-                }
-            }
-        }
-
+    accordHeading.forEach(function(item, i, arr) {
+        item.addEventListener('click', event => {
+            hideBlockContent();
+            showBlockContent(i);
+        });
     });
+    
+
+
 
 }
 
