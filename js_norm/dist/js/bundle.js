@@ -1553,13 +1553,16 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
 function accordion() {
   // Аккордион
   var accordBlock = document.querySelectorAll(".accordion-block"),
-      accordHeading = document.querySelectorAll(".accordion-heading");
+      accordHeading = document.querySelectorAll(".accordion-heading"),
+      MainBody = document.getElementsByTagName("body")[0],
+      a = 0;
 
   function hideBlockContent() {
     for (var i = 0; i < accordBlock.length; i++) {
       accordBlock[i].classList.remove("show");
       accordBlock[i].classList.remove('animated', "jackInTheBox");
       accordBlock[i].classList.add("hide");
+      accordHeading[i].classList.remove('active');
     }
   }
 
@@ -1570,14 +1573,29 @@ function accordion() {
       accordBlock[b].classList.remove("hide");
       accordBlock[b].classList.add("show");
       accordBlock[b].classList.add('animated', "jackInTheBox");
+      accordHeading[b].classList.add('active');
     }
   }
 
   accordHeading.forEach(function (item, i, arr) {
     item.addEventListener('click', function (event) {
-      hideBlockContent();
-      showBlockContent(i);
+      if (a % 2 == 0) {
+        hideBlockContent();
+        showBlockContent(i);
+        a++;
+      } else {
+        hideBlockContent();
+        a++;
+      }
     });
+  });
+  MainBody.addEventListener('click', function (event) {
+    var target = event.target;
+
+    if (!(target && target.classList.contains('heading'))) {
+      hideBlockContent();
+      a++;
+    }
   });
 }
 
@@ -1704,10 +1722,11 @@ function form() {
     input1.value = '';
   };
 
-  var clearInputModalDesign = function clearInputModalDesign(input, input1, input2) {
+  var clearInputModalDesign = function clearInputModalDesign(input, input1, input2, input3) {
     input.value = '';
     input1.value = '';
     input2.value = '';
+    input3.value = '';
   };
 
   var formConsult = document.querySelector('.form-consult'),
@@ -1719,7 +1738,12 @@ function form() {
       nameInput = document.querySelectorAll('.name-input'),
       phoneInput = document.querySelectorAll('.phone-input'),
       emailInput = document.querySelectorAll('.email-input'),
-      messageInput = document.querySelector('.message-input');
+      messageInput = document.querySelector('.input-text'),
+      messageTextarea = document.querySelector('.message-textarea');
+  console.log(emailInput[0]);
+  console.log(messageInput);
+  console.log(phoneInput[0]);
+  console.log(nameInput[0]);
   formConsult.addEventListener('submit', function () {
     SendForm(event, formConsult).then(function () {
       return statusMessage.innerHTML = message.loading;
@@ -1750,7 +1774,7 @@ function form() {
     }).catch(function () {
       return statusMessage.innerHTML = message.failure;
     }).then(function () {
-      return clearInputModalDesign(phoneInput[2], nameInput[2], emailInput[2]);
+      return clearInputModalDesign(phoneInput[2], nameInput[2], emailInput[1], messageTextarea);
     });
   });
 }

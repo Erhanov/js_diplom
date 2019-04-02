@@ -50,10 +50,11 @@ function form() {
 		input1.value = '';
 	};
 
-	let clearInputModalDesign = (input, input1, input2) => {
+	let clearInputModalDesign = (input, input1, input2, input3) => {
 		input.value = '';
 		input1.value = '';
 		input2.value = '';
+		input3.value = '';
 	};
 
 	let formConsult = document.querySelector('.form-consult'),
@@ -65,10 +66,14 @@ function form() {
 		nameInput = document.querySelectorAll('.name-input'),
 		phoneInput = document.querySelectorAll('.phone-input'),
 		emailInput = document.querySelectorAll('.email-input'),
-		messageInput = document.querySelector('.message-input');
+		messageInput = document.querySelector('.input-text'),
+		messageTextarea = document.querySelector('.message-textarea');
 
 
-
+	console.log(emailInput[0]);
+	console.log(messageInput);
+	console.log(phoneInput[0]);
+	console.log(nameInput[0]);
 
 
 	formConsult.addEventListener('submit', () => {
@@ -89,7 +94,7 @@ function form() {
 		SendForm(event, formModalDesign).then(() => statusMessage.innerHTML = message.loading)
 									.then(() => statusMessage.innerHTML = message.success)
 									.catch(() => statusMessage.innerHTML = message.failure)
-									.then(() => clearInputModalDesign(phoneInput[2], nameInput[2], emailInput[2]));
+									.then(() => clearInputModalDesign(phoneInput[2], nameInput[2], emailInput[1], messageTextarea));
 	});
 }
 
