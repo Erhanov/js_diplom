@@ -1579,6 +1579,9 @@ h4 {
   }
 }
 @media (max-width: 577px) {
+  .mobile-img{
+    width: 100%;
+  }
   h2 {
     font-size: 3.5rem;
   }

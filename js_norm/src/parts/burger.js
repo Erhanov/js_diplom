@@ -2,6 +2,7 @@ function burger() {
 	let burger = document.querySelector('.burger'),
 		burgerButton = document.querySelector('.burger-menu'),
 		header = document.querySelector('.header'),
+		MainBody = document.getElementsByTagName("body")[0],
 		a = 0;
 
 	function checkBurger() {
@@ -21,7 +22,7 @@ function burger() {
 			}
 	}
 
-	burger.addEventListener('click', checkBurger);	
+	burger.addEventListener('click', checkBurger)
 }
 
 module.exports = burger;

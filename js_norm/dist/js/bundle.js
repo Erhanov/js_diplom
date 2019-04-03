@@ -1625,6 +1625,7 @@ function burger() {
   var burger = document.querySelector('.burger'),
       burgerButton = document.querySelector('.burger-menu'),
       header = document.querySelector('.header'),
+      MainBody = document.getElementsByTagName("body")[0],
       a = 0;
 
   function checkBurger() {
@@ -1929,10 +1930,20 @@ function form() {
       messageTextarea = document.querySelector('.message-textarea');
 
   var phoneControl = function phoneControl(input) {
-    for (var i = 0; i < input.value.length; i++) {
+    var firstDigit = input.value.charCodeAt(0);
+
+    if (firstDigit > 57 || firstDigit < 42) {
+      input.value = '';
+    }
+
+    for (var i = 1; i < input.value.length; i++) {
       if (input.value.charCodeAt(i) > 57 || input.value.charCodeAt(i) < 48) {
-        input.value = '';
+        input.value = '+';
       }
+    }
+
+    if (input.value.length > 11) {
+      input.value = input.value.substring(0, 12);
     }
   };
 
@@ -2240,19 +2251,19 @@ function slider() {
 
     prev.addEventListener('click', function () {
       plusSlides(-1);
-      slides[slideIndex - 1].classList.remove('animated', 'fadeInRight');
-      slides[slideIndex - 1].classList.add('animated', 'fadeInLeft');
+      slides[slideIndex - 1].classList.remove('animated', 'fadeIn');
+      slides[slideIndex - 1].classList.add('animated', 'fadeIn');
     });
     next.addEventListener('click', function () {
       plusSlides(1);
-      slides[slideIndex - 1].classList.remove('animated', 'fadeInLeft');
-      slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
+      slides[slideIndex - 1].classList.remove('animated', 'fadeIn');
+      slides[slideIndex - 1].classList.add('animated', 'fadeIn');
     });
     showSlides(slideIndex);
     setInterval(function (n) {
       plusSlides(1);
-      slides[slideIndex - 1].classList.remove('animated', 'fadeInLeft');
-      slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
+      slides[slideIndex - 1].classList.remove('animated', 'fadeIn');
+      slides[slideIndex - 1].classList.add('animated', 'fadeIn');
     }, 5000);
   };
 

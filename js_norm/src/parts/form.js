@@ -71,10 +71,19 @@ function form() {
 
 
 	let phoneControl = (input) => {
-		for (let i = 0; i < input.value.length; i++) {
-			if (input.value.charCodeAt(i) > 57 || input.value.charCodeAt(i) < 48) {
-			input.value = '';
-			}
+		let firstDigit = input.value.charCodeAt(0);
+
+	    if (firstDigit > 57 || firstDigit < 42) {
+	      input.value = '';
+	    }
+
+	    for (let i = 1; i < input.value.length; i++) {
+	    	if (input.value.charCodeAt(i) > 57 || input.value.charCodeAt(i) < 48) {
+	    		input.value = '+';
+	    	}
+	    }
+		if (input.value.length > 11) {
+			input.value = input.value.substring(0, 12);
 		}
 	}
 
