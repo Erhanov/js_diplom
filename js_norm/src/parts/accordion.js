@@ -1,9 +1,10 @@
 function accordion() {
     // Аккордион
     let accordBlock = document.querySelectorAll(".accordion-block"),
-        accordHeading = document.querySelectorAll(".accordion-heading"),
+        accordHeading = document.querySelectorAll(".heading"),
         MainBody = document.getElementsByTagName("body")[0],
-        a = 0;
+        a = 0,
+        b = 0;
 
     function hideBlockContent() {
         for (let i = 0; i < accordBlock.length; i++) {
@@ -27,12 +28,13 @@ function accordion() {
 
     accordHeading.forEach(function(item, i, arr) {
         item.addEventListener('click', event => {
-            if (a % 2 == 0) {
+            let target = event.target;
+            if (target && target.classList.contains('active')) {
+                hideBlockContent();
+                a++;
+            } else if (target && target.classList.contains('heading')) {
                 hideBlockContent();
                 showBlockContent(i);
-                a++;
-            } else {
-                hideBlockContent();
                 a++;
             }
         });
@@ -41,7 +43,6 @@ function accordion() {
     MainBody.addEventListener('click', event => {
         
         let target = event.target;
-
         if (!(target && target.classList.contains('heading'))) {
             hideBlockContent();
             a++;

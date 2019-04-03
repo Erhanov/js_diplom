@@ -70,10 +70,31 @@ function form() {
 		messageTextarea = document.querySelector('.message-textarea');
 
 
-	console.log(emailInput[0]);
-	console.log(messageInput);
-	console.log(phoneInput[0]);
-	console.log(nameInput[0]);
+	let phoneControl = (input) => {
+		for (let i = 0; i < input.value.length; i++) {
+			if (input.value.charCodeAt(i) > 57 || input.value.charCodeAt(i) < 48) {
+			input.value = '';
+			}
+		}
+	}
+
+	let textControl = (input) => {
+		for (let i = 0; i < input.value.length; i++) {
+			if (input.value.charCodeAt(i) > 1103 || input.value.charCodeAt(i) < 1072) {
+			input.value = '';
+			}
+		}
+	}
+
+	let emailControl = (input) => {
+		for (let i = 0; i < input.value.length; i++) {
+			if (input.value.charCodeAt(i) > 122 || input.value.charCodeAt(i) < 97) {
+			input.value = '';
+			}
+		}
+	}
+
+
 
 
 	formConsult.addEventListener('submit', () => {
@@ -95,6 +116,24 @@ function form() {
 									.then(() => statusMessage.innerHTML = message.success)
 									.catch(() => statusMessage.innerHTML = message.failure)
 									.then(() => clearInputModalDesign(phoneInput[2], nameInput[2], emailInput[1], messageTextarea));
+	});
+
+	nameInput.forEach(function(item) {
+		item.addEventListener('input', () => {
+			textControl(item);
+		});
+	});
+
+	emailInput.forEach(function(item) {
+		item.addEventListener('input', () => {
+			emailControl(item);
+		});
+	});
+
+	phoneInput.forEach(function(item) {
+		item.addEventListener('input', () => {
+			phoneControl(item);
+		});
 	});
 }
 

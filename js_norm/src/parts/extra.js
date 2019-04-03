@@ -5,21 +5,14 @@ function extra() {
     }
 
     let paint = document.querySelectorAll(".extra-paint"),
-        paintBtn = document.querySelector(".extra-paint-btn"),
-        a = 0;
+        paintBtn = document.querySelector(".extra-paint-btn");
 
     paintBtn.addEventListener("click", () => {
-        if (a % 2 == 0) {
-			paint.forEach(function (item) {
-            	showImg(item);
-        	});
-        	a++;
-        } else {
-        	paint.forEach(function(item) {
-        		item.style.display = 'none';
-        	});
-        	a++;
-        }
+		paint.forEach(function (item) {
+        	showImg(item);
+        	paintBtn.style.display = 'none';
+    	});
+        
     });
 
 }

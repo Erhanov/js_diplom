@@ -1561,9 +1561,10 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
 function accordion() {
   // Аккордион
   var accordBlock = document.querySelectorAll(".accordion-block"),
-      accordHeading = document.querySelectorAll(".accordion-heading"),
+      accordHeading = document.querySelectorAll(".heading"),
       MainBody = document.getElementsByTagName("body")[0],
-      a = 0;
+      a = 0,
+      b = 0;
 
   function hideBlockContent() {
     for (var i = 0; i < accordBlock.length; i++) {
@@ -1587,12 +1588,14 @@ function accordion() {
 
   accordHeading.forEach(function (item, i, arr) {
     item.addEventListener('click', function (event) {
-      if (a % 2 == 0) {
+      var target = event.target;
+
+      if (target && target.classList.contains('active')) {
+        hideBlockContent();
+        a++;
+      } else if (target && target.classList.contains('heading')) {
         hideBlockContent();
         showBlockContent(i);
-        a++;
-      } else {
-        hideBlockContent();
         a++;
       }
     });
@@ -1621,10 +1624,11 @@ module.exports = accordion;
 function burger() {
   var burger = document.querySelector('.burger'),
       burgerButton = document.querySelector('.burger-menu'),
+      header = document.querySelector('.header'),
       a = 0;
 
-  if (window.innerWidth <= 768) {
-    burger.addEventListener('click', function () {
+  function checkBurger() {
+    if (window.innerWidth <= 768) {
       if (a % 2 == 0) {
         burgerButton.style.display = 'block';
         burgerButton.classList.add('animated', 'fadeInDown');
@@ -1637,8 +1641,10 @@ function burger() {
           burgerButton.classList.remove('animated', 'fadeOutUp');
         }, 500);
       }
-    });
+    }
   }
+
+  burger.addEventListener('click', checkBurger);
 }
 
 module.exports = burger;
@@ -1722,20 +1728,12 @@ function extra() {
   };
 
   var paint = document.querySelectorAll(".extra-paint"),
-      paintBtn = document.querySelector(".extra-paint-btn"),
-      a = 0;
+      paintBtn = document.querySelector(".extra-paint-btn");
   paintBtn.addEventListener("click", function () {
-    if (a % 2 == 0) {
-      paint.forEach(function (item) {
-        showImg(item);
-      });
-      a++;
-    } else {
-      paint.forEach(function (item) {
-        item.style.display = 'none';
-      });
-      a++;
-    }
+    paint.forEach(function (item) {
+      showImg(item);
+      paintBtn.style.display = 'none';
+    });
   });
 }
 
@@ -1930,10 +1928,31 @@ function form() {
       emailInput = document.querySelectorAll('.email-input'),
       messageInput = document.querySelector('.input-text'),
       messageTextarea = document.querySelector('.message-textarea');
-  console.log(emailInput[0]);
-  console.log(messageInput);
-  console.log(phoneInput[0]);
-  console.log(nameInput[0]);
+
+  var phoneControl = function phoneControl(input) {
+    for (var i = 0; i < input.value.length; i++) {
+      if (input.value.charCodeAt(i) > 57 || input.value.charCodeAt(i) < 48) {
+        input.value = '';
+      }
+    }
+  };
+
+  var textControl = function textControl(input) {
+    for (var i = 0; i < input.value.length; i++) {
+      if (input.value.charCodeAt(i) > 1103 || input.value.charCodeAt(i) < 1072) {
+        input.value = '';
+      }
+    }
+  };
+
+  var emailControl = function emailControl(input) {
+    for (var i = 0; i < input.value.length; i++) {
+      if (input.value.charCodeAt(i) > 122 || input.value.charCodeAt(i) < 97) {
+        input.value = '';
+      }
+    }
+  };
+
   formConsult.addEventListener('submit', function () {
     SendForm(event, formConsult).then(function () {
       return statusMessage.innerHTML = message.loading;
@@ -1965,6 +1984,21 @@ function form() {
       return statusMessage.innerHTML = message.failure;
     }).then(function () {
       return clearInputModalDesign(phoneInput[2], nameInput[2], emailInput[1], messageTextarea);
+    });
+  });
+  nameInput.forEach(function (item) {
+    item.addEventListener('input', function () {
+      textControl(item);
+    });
+  });
+  emailInput.forEach(function (item) {
+    item.addEventListener('input', function () {
+      emailControl(item);
+    });
+  });
+  phoneInput.forEach(function (item) {
+    item.addEventListener('input', function () {
+      phoneControl(item);
     });
   });
 }
