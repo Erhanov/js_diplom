@@ -1,5 +1,4 @@
 function calc() {
-	console.log('2');
 
 	let sizePicture = document.getElementById('size'),
 		materialPicture = document.getElementById('material'),

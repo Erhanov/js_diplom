@@ -1659,7 +1659,6 @@ module.exports = burger;
 /***/ (function(module, exports) {
 
 function calc() {
-  console.log('2');
   var sizePicture = document.getElementById('size'),
       materialPicture = document.getElementById('material'),
       optionsPicture = document.getElementById('options'),
