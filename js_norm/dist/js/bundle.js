@@ -1520,13 +1520,21 @@ window.addEventListener('DOMContentLoaded', function () {
       modal = __webpack_require__(/*! ./parts/modal.js */ "./src/parts/modal.js"),
       slider = __webpack_require__(/*! ./parts/slider.js */ "./src/parts/slider.js"),
       form = __webpack_require__(/*! ./parts/form.js */ "./src/parts/form.js"),
-      accordion = __webpack_require__(/*! ./parts/accordion.js */ "./src/parts/accordion.js");
+      accordion = __webpack_require__(/*! ./parts/accordion.js */ "./src/parts/accordion.js"),
+      filter = __webpack_require__(/*! ./parts/filter.js */ "./src/parts/filter.js"),
+      extra = __webpack_require__(/*! ./parts/extra.js */ "./src/parts/extra.js"),
+      load = __webpack_require__(/*! ./parts/load.js */ "./src/parts/load.js"),
+      burger = __webpack_require__(/*! ./parts/burger.js */ "./src/parts/burger.js");
 
   calc();
   modal();
   slider();
   form();
   accordion();
+  filter();
+  extra();
+  load();
+  burger();
 });
 
 if ('NodeList' in window && !NodeList.prototype.forEach) {
@@ -1603,6 +1611,37 @@ module.exports = accordion;
 
 /***/ }),
 
+/***/ "./src/parts/burger.js":
+/*!*****************************!*\
+  !*** ./src/parts/burger.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function burger() {
+  var burger = document.querySelector('.burger'),
+      burgerButton = document.querySelector('.burger-menu'),
+      a = 0;
+  burger.addEventListener('click', function () {
+    if (a % 2 == 0) {
+      burgerButton.style.display = 'block';
+      burgerButton.classList.add('animated', 'fadeInDown');
+      a++;
+    } else {
+      burgerButton.classList.add('animated', 'fadeOutUp');
+      a++;
+      setTimeout(function () {
+        burgerButton.style.display = 'none';
+        burgerButton.classList.remove('animated', 'fadeOutUp');
+      }, 500);
+    }
+  });
+}
+
+module.exports = burger;
+
+/***/ }),
+
 /***/ "./src/parts/calc.js":
 /*!***************************!*\
   !*** ./src/parts/calc.js ***!
@@ -1663,6 +1702,154 @@ function calc() {
 }
 
 module.exports = calc;
+
+/***/ }),
+
+/***/ "./src/parts/extra.js":
+/*!****************************!*\
+  !*** ./src/parts/extra.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function extra() {
+  var showImg = function showImg(n) {
+    n.style.display = "block";
+    n.classList.add("animated", "fadeIn");
+  };
+
+  var paint = document.querySelectorAll(".extra-paint"),
+      paintBtn = document.querySelector(".extra-paint-btn"),
+      a = 0;
+  paintBtn.addEventListener("click", function () {
+    if (a % 2 == 0) {
+      paint.forEach(function (item) {
+        showImg(item);
+      });
+      a++;
+    } else {
+      paint.forEach(function (item) {
+        item.style.display = 'none';
+      });
+      a++;
+    }
+  });
+}
+
+module.exports = extra;
+
+/***/ }),
+
+/***/ "./src/parts/filter.js":
+/*!*****************************!*\
+  !*** ./src/parts/filter.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function filter() {
+  var showImg = function showImg(n) {
+    n.style.display = "block";
+    n.classList.add("animated", "fadeIn");
+  };
+
+  var port = document.querySelector(".portfolio"),
+      portImg = document.querySelectorAll(".portfolio-img"),
+      allWorks = document.querySelector(".all"),
+      lovers = document.querySelector(".lovers"),
+      chef = document.querySelector(".chef"),
+      girl = document.querySelector(".girl"),
+      guy = document.querySelector(".guy"),
+      grandma = document.querySelector(".grandmother"),
+      grandpa = document.querySelector(".granddad"),
+      imgBlock = document.querySelectorAll(".portfolio-block"),
+      portNo = document.querySelector(".portfolio-no");
+  port.addEventListener("click", function (event) {
+    var target = event.target;
+
+    function checkBtn() {
+      if (target && (target == lovers || target == allWorks || target == chef || target == girl || target == guy || target == grandma || target == grandpa)) {
+        portImg.forEach(function (item) {
+          item.classList.remove("active");
+        });
+        imgBlock.forEach(function (item) {
+          item.style.display = "none";
+          item.classList.remove("fadeIn");
+        });
+        portNo.style.display = "none";
+      }
+    }
+
+    function portfolioNoImgs() {
+      portNo.style.display = "block";
+      portNo.classList.add("fadeIn");
+    }
+
+    if (target && target == lovers) {
+      checkBtn();
+      lovers.classList.add("active");
+      imgBlock.forEach(function (item) {
+        if (item.classList.contains("lovers")) {
+          showImg(item);
+        }
+      });
+    }
+
+    if (target && target == allWorks) {
+      checkBtn();
+      allWorks.classList.add("active");
+      imgBlock.forEach(function (item) {
+        if (item.classList.contains("all")) {
+          showImg(item);
+        }
+      });
+    }
+
+    if (target && target == chef) {
+      checkBtn();
+      chef.classList.add("active");
+      imgBlock.forEach(function (item) {
+        if (item.classList.contains("chef")) {
+          showImg(item);
+        }
+      });
+    }
+
+    if (target && target == girl) {
+      checkBtn();
+      girl.classList.add("active");
+      imgBlock.forEach(function (item) {
+        if (item.classList.contains("girl")) {
+          showImg(item);
+        }
+      });
+    }
+
+    if (target && target == guy) {
+      checkBtn();
+      guy.classList.add("active");
+      imgBlock.forEach(function (item) {
+        if (item.classList.contains("guy")) {
+          showImg(item);
+        }
+      });
+    }
+
+    if (target && target == grandma) {
+      checkBtn();
+      grandma.classList.add("active");
+      portfolioNoImgs();
+    }
+
+    if (target && target == grandpa) {
+      checkBtn();
+      grandpa.classList.add("active");
+      portfolioNoImgs();
+    }
+  });
+}
+
+module.exports = filter;
 
 /***/ }),
 
@@ -1780,6 +1967,91 @@ function form() {
 }
 
 module.exports = form;
+
+/***/ }),
+
+/***/ "./src/parts/load.js":
+/*!***************************!*\
+  !*** ./src/parts/load.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function load() {
+  var hovers1 = document.querySelector('.size-1'),
+      hovers2 = document.querySelector('.size-2'),
+      hovers3 = document.querySelector('.size-3'),
+      hovers4 = document.querySelector('.size-4'),
+      sizeContainer = document.querySelector('.sizes'),
+      sizeP = document.querySelectorAll('.size'),
+      startPrice = document.querySelectorAll('.starting-price'),
+      finalPrice = document.querySelectorAll('.final-price'),
+      sizeBlock = document.querySelectorAll('.sizes-block');
+  sizeContainer.addEventListener('mouseover', function (event) {
+    var target = event.target;
+
+    if (target && target == hovers1) {
+      hovers1.src = 'img/sizes-1-1.png';
+      sizeP[0].style.display = 'none';
+      startPrice[0].style.display = 'none';
+      finalPrice[0].style.display = 'none';
+    }
+
+    if (target && target == hovers2) {
+      hovers2.src = 'img/sizes-2-1.png';
+      sizeP[1].style.display = 'none';
+      startPrice[1].style.display = 'none';
+      finalPrice[1].style.display = 'none';
+    }
+
+    if (target && target == hovers3) {
+      hovers3.src = 'img/sizes-3-1.png';
+      sizeP[2].style.display = 'none';
+      startPrice[2].style.display = 'none';
+      finalPrice[2].style.display = 'none';
+    }
+
+    if (target && target == hovers4) {
+      hovers4.src = 'img/sizes-4-1.png';
+      sizeP[3].style.display = 'none';
+      startPrice[3].style.display = 'none';
+      finalPrice[3].style.display = 'none';
+    }
+  });
+  sizeContainer.addEventListener('mouseout', function (event) {
+    var target = event.target;
+
+    if (target && target == hovers1) {
+      hovers1.src = 'img/sizes-1.png';
+      sizeP[0].style.display = 'block';
+      startPrice[0].style.display = 'block';
+      finalPrice[0].style.display = 'block';
+    }
+
+    if (target && target == hovers2) {
+      hovers2.src = 'img/sizes-2.png';
+      sizeP[1].style.display = 'block';
+      startPrice[1].style.display = 'block';
+      finalPrice[1].style.display = 'block';
+    }
+
+    if (target && target == hovers3) {
+      hovers3.src = 'img/sizes-3.png';
+      sizeP[2].style.display = 'block';
+      startPrice[2].style.display = 'block';
+      finalPrice[2].style.display = 'block';
+    }
+
+    if (target && target == hovers4) {
+      hovers4.src = 'img/sizes-4.png';
+      sizeP[3].style.display = 'block';
+      startPrice[3].style.display = 'block';
+      finalPrice[3].style.display = 'block';
+    }
+  });
+}
+
+module.exports = load;
 
 /***/ }),
 

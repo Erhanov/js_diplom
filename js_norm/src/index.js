@@ -5,13 +5,21 @@ window.addEventListener('DOMContentLoaded', () => {
 		modal = require('./parts/modal.js'),
 		slider = require('./parts/slider.js'),
 		form = require('./parts/form.js'),
-		accordion = require('./parts/accordion.js');
+		accordion = require('./parts/accordion.js'),
+		filter = require('./parts/filter.js'),
+		extra = require('./parts/extra.js'),
+		load = require('./parts/load.js'),
+		burger = require('./parts/burger.js');
 
 	calc();
 	modal();
 	slider();
 	form();
 	accordion();
+	filter();
+	extra();
+	load();
+	burger();
 });
 
 if ('NodeList' in window && !NodeList.prototype.forEach) {
