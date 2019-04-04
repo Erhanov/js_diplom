@@ -1391,6 +1391,9 @@ h4 {
   .header .burger {
     cursor: pointer;
   }
+  .burger {
+    display: none;
+  }
   .header .burger span {
     display: none;
   }
@@ -1501,6 +1504,9 @@ h4 {
     max-width: 30rem;
     margin-left: auto;
     margin-right: auto;
+  }
+  .burger {
+    display: block;
   }
   .card-block {
     padding: 5rem;
