@@ -9,7 +9,8 @@ window.addEventListener('DOMContentLoaded', () => {
 		filter = require('./parts/filter.js'),
 		extra = require('./parts/extra.js'),
 		load = require('./parts/load.js'),
-		burger = require('./parts/burger.js');
+		burger = require('./parts/burger.js'),
+		link = require('./parts/link.js');
 
 	calc();
 	modal();
@@ -20,6 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	extra();
 	load();
 	burger();
+	link();
 });
 
 if ('NodeList' in window && !NodeList.prototype.forEach) {

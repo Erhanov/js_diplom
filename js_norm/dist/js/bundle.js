@@ -1524,7 +1524,8 @@ window.addEventListener('DOMContentLoaded', function () {
       filter = __webpack_require__(/*! ./parts/filter.js */ "./src/parts/filter.js"),
       extra = __webpack_require__(/*! ./parts/extra.js */ "./src/parts/extra.js"),
       load = __webpack_require__(/*! ./parts/load.js */ "./src/parts/load.js"),
-      burger = __webpack_require__(/*! ./parts/burger.js */ "./src/parts/burger.js");
+      burger = __webpack_require__(/*! ./parts/burger.js */ "./src/parts/burger.js"),
+      link = __webpack_require__(/*! ./parts/link.js */ "./src/parts/link.js");
 
   calc();
   modal();
@@ -1535,6 +1536,7 @@ window.addEventListener('DOMContentLoaded', function () {
   extra();
   load();
   burger();
+  link();
 });
 
 if ('NodeList' in window && !NodeList.prototype.forEach) {
@@ -2014,6 +2016,55 @@ function form() {
 }
 
 module.exports = form;
+
+/***/ }),
+
+/***/ "./src/parts/link.js":
+/*!***************************!*\
+  !*** ./src/parts/link.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function link() {
+  var anchors = document.querySelectorAll('a[href*="#"]');
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    var _loop = function _loop() {
+      var anchor = _step.value;
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        var blockID = anchor.getAttribute('href');
+        document.querySelector('' + blockID).scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      });
+    };
+
+    for (var _iterator = anchors[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      _loop();
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+}
+
+module.exports = link;
 
 /***/ }),
 
